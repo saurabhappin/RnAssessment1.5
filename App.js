@@ -14,11 +14,11 @@ class App extends React.Component {
     this.bindedFunction = this.func.bind(this.obj1);
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   return (this.state = {
-  //     message: 'Changed',
-  //   });
-  // }
+  static getDerivedStateFromProps(props, state) {
+    return (this.state = {
+      message: 'Changed',
+    });
+  }
 
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -36,12 +36,6 @@ class App extends React.Component {
       .catch(err => console.log('Error Occured ' + err));
   }
 
-  static getDrivedFromProps(props, state) {
-    return this.setState({
-      message: 'Updated once again',
-    });
-  }
-
   obj1 = {
     key1: 'value1',
   };
@@ -50,14 +44,22 @@ class App extends React.Component {
     console.log(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.message !== nextProps.message) {
-      return true;
-    }
-    if (this.state.count !== nextState.count) {
-      return true;
-    }
-    return false;
+  //Commented because button will not work when we use shouldComponentUpdate
+  //Please uncomment to check functionality
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.message !== nextProps.message) {
+  //     return true;
+  //   }
+  //   if (this.state.count !== nextState.count) {
+  //     return true;
+  //   }
+  //   console.log('inside shouldComponentUpdate');
+  //   return false;
+  // }
+
+  componentDidUpdate() {
+    console.log('Component did update');
   }
 
   componentWillUnmount() {
@@ -87,7 +89,5 @@ class App extends React.Component {
     );
   }
 }
-
-
 
 export default App;
